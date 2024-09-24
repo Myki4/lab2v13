@@ -1,0 +1,61 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+class File
+{
+private:
+    string name;
+    double size;
+    string creationDate;
+    string attributes;
+
+public:
+    File(const string& fileName, double fileSize, const string& date, const string& attrs)
+        : name(fileName), size(fileSize), creationDate(date), attributes(attrs) {}
+
+    void displayInfo() const
+    {
+        cout << "File Name: " << name << endl;
+        cout << "Size: " << size << " KB" << endl;
+        cout << "Creation Date: " << creationDate << endl;
+        cout << "Attributes: " << attributes << endl;
+    }
+};
+
+class Catalog
+{
+private:
+    vector<File> files;
+
+public:
+    void addFile(const File& file)
+    {
+        files.push_back(file);
+    }
+
+    void displayFiles()
+    {
+        for (const auto& file : files)
+        {
+            file.displayInfo();
+            cout << "------------------------" << endl;
+        }
+    }
+};
+
+int main()
+{
+    File file1("document.txt", 1024, "2024-09-17", "read-only");
+    File file2("image.jpg", 2048, "2024-09-16", "hidden");
+
+    Catalog myCatalog;
+    myCatalog.addFile(file1);
+    myCatalog.addFile(file2);
+
+    cout << "Files in the catalog:" << endl;
+    myCatalog.displayFiles();
+
+    return 0;
+}
